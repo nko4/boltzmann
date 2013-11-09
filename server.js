@@ -22,5 +22,5 @@ http.createServer(function (req, res) {
     });
   }
 
-  console.log('Boltzmann Server running at http://0.0.0.0:' + port + '/');
+  console.log('Location Dating Server running at http://0.0.0.0:' + port + '/');
 });

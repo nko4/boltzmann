@@ -22,5 +22,5 @@ http.createServer(function (req, res) {
     });
   }
 
-  console.log('Server running at http://0.0.0.0:' + port + '/');
+  console.log('Boltzmann Server running at http://0.0.0.0:' + port + '/');
 });

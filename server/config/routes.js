@@ -27,6 +27,23 @@
  */
 
 module.exports.routes = {
+    
+  //standard RESTful routing
+    'get /user' : {
+        controller : 'user',
+        action : 'findAll'
+    },
+    
+    'post /user' : {
+        controller : 'user',
+        action : 'create'
+    },
+    
+    'put /user' : {
+        controller : 'user',
+        action : 'update'
+    },
+    
 
   // By default, your root route (aka home page) points to a view
   // located at `views/home/index.ejs`

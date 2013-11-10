@@ -87,6 +87,7 @@
       </div>
     </div>
 
+<br />
 <div class="container"  class="clearfix">
 <form class="form-horizontal" name = "signup" id = "signup" enctype="multipart/form-data">
 <div class="row">

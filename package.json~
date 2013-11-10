@@ -1,19 +1,14 @@
 {
-  "name": "nko4-boltzmann",
-  "version": "0.0.0",
-  "description": "Boltzmann",
-  "main": "server.js",
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:nko4/boltzmann.git"
+    "start": "node app.js"
   },
   "dependencies": {
-    "nko": "*"
-  },
-  "engines": {
-    "node": "0.10.x"
+    "express": "3.4.4",
+    "jade": "*",
+	"node-mysql": "*",
+	"foursquarevenues": "*"
   }
 }

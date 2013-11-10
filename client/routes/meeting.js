@@ -34,7 +34,7 @@ var geocoder = require('node-geocoder').getGeocoder("google", 'http');
  return all active meetings for the user
  **/
 Meeting.meetings = function(req, res){
-    var userid = 1234; //req.session.userid;
+    var userid = req.session.userid;
     console.log("meetings");
     
     var q = "SELECT meeting_id, user1_id, user2_id, status, error, new FROM meeting WHERE user1_id = '" + userid + "' OR user2_id = '" + userid +"';";
@@ -45,12 +45,12 @@ Meeting.meetings = function(req, res){
                      res.send(rows, 200);
                      });
     
-    
+     /*
      Meeting.create(1234, 1234, function(userid){
      console.log("new record " + userid);
      });
     
-     /*
+    
      Meeting.create(2311, 2345, function(userid){
      console.log("new record " + userid);
      });
@@ -68,7 +68,7 @@ Meeting.meetings = function(req, res){
  mark the meeting as read / not new
  **/
 Meeting.get = function(req, res){
-    var userid = 1234; //req.session.userid;
+    var userid = req.session.userid;
     var meetingid = req.params.id;
     console.log("meeting.get " + meetingid);
     
@@ -92,7 +92,7 @@ Meeting.get = function(req, res){
  update a meeting schedule
  **/
 Meeting.update = function(req, res){
-    var userid = 1234; //req.session.userid;
+    var userid = req.session.userid;
     var meetingid = req.params.id;
     var beginDate = (new Date()).toString(); //req.params.beginDate;
     var endDate = (new Date()).toString(); //req.params.endDate;

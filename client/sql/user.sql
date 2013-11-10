@@ -11,9 +11,17 @@ CREATE TABLE `user` (
   `age` int(3) NOT NULL DEFAULT '0',
   `gender` varchar(8) NOT NULL DEFAULT '',
   `smoker` int(3) NOT NULL DEFAULT '0',
-  `housing` varchar(32) NOT NULL DEFAULT '',    
-  `status` varchar(32) NOT NULL DEFAULT '',    
-  `employment` varchar(32) NOT NULL DEFAULT '',    
+  `housing` varchar(32) NOT NULL DEFAULT '',
+  `status` varchar(32) NOT NULL DEFAULT '',
+  `employment` varchar(32) NOT NULL DEFAULT '',
+  `education` varchar(32) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `height` varchar(8) NOT NULL,
+  `bodytype` varchar(32) NOT NULL,
+  `haircolor` varchar(32) NOT NULL,
+  `prefgender` varchar(8) NOT NULL,
+  `prefagestart` int(11) NOT NULL,
+  `prefageend` int(11) NOT NULL,
+  `radius` varchar(8) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci'
-
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci'

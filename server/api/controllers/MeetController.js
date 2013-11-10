@@ -1,5 +1,5 @@
 /**
- * UserController
+ * MeetController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -20,44 +20,38 @@ module.exports = {
   
   /**
    * Action blueprints:
-   *    `/user/create`
+   *    `/meet/create`
    */
    create: function (req, res) {
-       console.log("create");
-       
+       console.log("meet::create");
     // Send a JSON response
     return res.json({
       hello: 'world'
     });
   },
 
+
   /**
    * Action blueprints:
-   *    `/user/private_profile`
-   * 
-   * retrieve public profile of a user
+   *    `/meet/meetings`
+   *
+   *  retrieve all meetings for the current user
    */
-   private_profile: function (req, res) {
+   meetings: function (req, res) {
     
-     console.log("private_profile");
-       
+       console.log("meet:meetings");
     // Send a JSON response
     return res.json({
       hello: 'world'
     });
   },
-  
-    
+
     /**
-     * Action blueprints:
-     *    `/user/private_profile`
-     *
-     * retrieve public profile of a user
-     */
-    public_profile: function (req, res) {
-        
-        console.log("public_profile");
-        
+     * retrieve detail of a meeting
+     **/
+    find: function (req, res) {
+        console.log("meet:find");
+
         // Send a JSON response
         return res.json({
                         hello: 'world'
@@ -66,11 +60,30 @@ module.exports = {
 
   /**
    * Action blueprints:
-   *    `/user/update`
+   *    `/meet/destroy`
+   * 
+   * uer cancels a specific meeting
+   */
+   destroy: function (req, res) {
+    
+       console.log("meet:destroy");
+
+       
+    // Send a JSON response
+    return res.json({
+      hello: 'world'
+    });
+  },
+
+
+  /**
+   * Action blueprints:
+   *    `/meet/update`
    */
    update: function (req, res) {
     
-       console.log("update");
+       console.log("meet:update");
+
        
     // Send a JSON response
     return res.json({
@@ -83,7 +96,7 @@ module.exports = {
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to UserController)
+   * (specific to MeetController)
    */
   _config: {}
 

@@ -28,20 +28,58 @@
 
 module.exports.routes = {
     
-  //standard RESTful routing
+  //User Routes
+    
+    //get user record
     'get /user' : {
         controller : 'user',
-        action : 'findAll'
+        action : 'private_profile'
     },
     
+    //create a new user record
     'post /user' : {
         controller : 'user',
         action : 'create'
     },
     
+    //update a user record
     'put /user' : {
         controller : 'user',
         action : 'update'
+    },
+    
+    //retrieve public profile of a user
+    'get /user/:id' : {
+        controller : 'user',
+        action : 'public_profile'
+    },
+    
+    //Meet Routes
+    
+    //retrive meeting list for the current session user
+    'get /meet' : {
+        controller : 'meet',
+        action : 'meetings',
+    },
+    
+    
+    //update a meeting detail
+    'put /meet' : {
+        controller : 'meet',
+        action : 'update'
+    },
+    
+    
+    //get detail of a meeting
+    'get /meet/:id' : {
+        controller : 'meet',
+        action : 'find'
+    },
+    
+    //cancel a meeting
+    'delete /meet/:id' : {
+        controller : 'meet',
+        action : 'destroy'
     },
     
 

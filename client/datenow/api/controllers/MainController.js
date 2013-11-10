@@ -19,9 +19,6 @@ module.exports = {
     index: function (req, res) {
          res.view();
     },
-   index: function (req, res) {
-    res.view();
-  },
 
   signup: function (req, res) {
     var username = req.param('username');

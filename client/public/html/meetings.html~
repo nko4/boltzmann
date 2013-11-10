@@ -76,6 +76,7 @@
 		  <ul class="nav navbar-nav">
             <li><a href="/html/meetings.html">Meetings</a></li>
 			<li><a href="/html/profiles.html">Browse Profiles</a></li>
+			<iframe src="http://nodeknockout.com/iframe/boltzmann" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
           </ul>
           <form class="navbar-form navbar-right" id = "logout" name = "login">
             <button type="submit" id ="logoutButton" class="btn btn-success">Logout</button>

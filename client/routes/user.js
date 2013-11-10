@@ -15,6 +15,30 @@ exports.list = function(req, res){
 	res.send("respond with a resource");
 };
 
+exports.login = function(req, res){
+	var data = req.body
+	var connection = mysql.createConnection({
+		host     : '10.19.8.250',
+		user     : 'nicholas',
+		password : 'nicholas',
+		database : 'testdb'
+	});
+	console.log(req.body)
+	var q = "SELECT user_id AS id FROM user WHERE username = '"+ data.username +"' AND password = '"+ data.password +"';"
+	console.log(q)
+	connection.query(q, function(err, rows, fields) {
+		if (err) throw err;
+		if (typeof rows[0] !== 'undefined'){
+			req.session.userid = rows[0].id;
+			res.send(req.session.userid, 200)
+		}
+		else {
+			req.session.userid = 'undefined';
+			res.send("Invalid username and password.", 400)
+		}
+	})
+}
+
 exports.create = function(req, res){
 	var data = req.body
 
@@ -66,6 +90,7 @@ exports.create = function(req, res){
 			  		if (err) throw err;
 					userid = rows[0].id
 					console.log(userid)
+					req.session.userid = userid
 					res.send(userid, 200)
 				});
 			});

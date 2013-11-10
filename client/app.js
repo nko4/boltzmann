@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var match = require('./routes/match');
+var meeting = require('./routes/meeting.js');
 var http = require('http');
 var path = require('path');
 
@@ -38,6 +39,10 @@ app.post('/login', user.login);
 app.post('/meet', user.meet);
 app.get('/match', match.notify);
 
+app.get('/meetings', meeting.meetings);
+app.get('/meeting/new', meeting.new_meeting)
+app.get('/meeting/:id', meeting.get);
+app.put('/meeting/:id', meeting.update);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

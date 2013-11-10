@@ -61,9 +61,39 @@ module.exports = {
       required: true
     },
 	
+	gender:{
+		type: 'string',
+		required: true
+	},
+
+	smoker:{
+		type: 'boolean',
+		required: true
+	},
+
+	housing:{
+		type: 'string',
+		required: true
+	},
+
+	relationshipstatus:{
+		type: 'string',
+		required: true
+	},
+
+	employment:{
+		type: 'string',
+		required: true
+	},
+
 	height: {
-		type: 'integer', 
+		type: 'string', 
 		require: true
+	},
+
+	bodytype:{
+		type: 'string',
+		required: true
 	},
 	
 	haircolor: {
@@ -71,8 +101,43 @@ module.exports = {
 		require: true
 	},
 
+	education:{
+		type: 'string',
+		required: true
+	},
+
+	owns:{
+		type: 'string',
+		required: true
+	},
+
+	children:{
+		type: 'string',
+		required: true
+	},
+
+	description:{
+		type: 'string',
+		required: true
+	},
+
 	prefgender: {
 		type: 'string',
+		require: true
+	},
+
+	prefagestart: {
+		type: 'integer',
+		require: true
+	},
+
+	prefageend: {
+		type: 'integer',
+		require: true
+	},
+
+	radius: {
+		type: 'integer',
 		require: true
 	}	
 

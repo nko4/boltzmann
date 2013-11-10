@@ -15,6 +15,9 @@
             location = "group:controllers"
             name = "controllers">
             <FileRef
+               location = "group:MainController.js">
+            </FileRef>
+            <FileRef
                location = "group:MeetController.js">
             </FileRef>
             <FileRef
@@ -2621,6 +2624,13 @@
       <Group
          location = "group:views"
          name = "views">
+         <Group
+            location = "group:main"
+            name = "main">
+            <FileRef
+               location = "group:index.ejs">
+            </FileRef>
+         </Group>
          <FileRef
             location = "group:403.ejs">
          </FileRef>
@@ -2630,13 +2640,6 @@
          <FileRef
             location = "group:500.ejs">
          </FileRef>
-         <Group
-            location = "group:home"
-            name = "home">
-            <FileRef
-               location = "group:index.ejs">
-            </FileRef>
-         </Group>
          <FileRef
             location = "group:layout.ejs">
          </FileRef>

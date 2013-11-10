@@ -82,6 +82,8 @@ exports.login = function(req, res){
 }
 
 exports.create = function(req, res){
+
+	console.log(req)
 	var data = req.body
 	console.log(data)
 	var connection = mysql.createConnection({
@@ -145,7 +147,7 @@ exports.create = function(req, res){
 		else{
 			var q = "INSERT INTO user (username, password, email, street, city, state, country, postal, age, gender, smoker, housing, status, employment, education, description, height, bodytype, haircolor, prefgender, prefagestart, prefageend, radius) VALUES ('"
 			+data.username+"', '"+data.password+"', '"+data.email+"', '"+data.street+"', '"+data.city+"', '"+data.state+"', '"+data.country+"', '"+data.postal+
-			"', '"+data.age+"', '"+data.gender+"', '"+(0 + (data.smoker === "Yes"))+"', '"+data.housing+"', '"+data.status+"', '"+data.employment+"', '"+data.education+"', '"+data.biography+"', '"+data.height.replace('"', "_")+"', '"+data.btype+"', '"+data.hair+"', '"+data.genderpref+"', '"+data.prefagestart+"', '"+data.prefageend+"', '"+data.radius+"');"
+			"', '"+data.age+"', '"+data.gender+"', '"+(0 + (data.smoker === "Yes"))+"', '"+data.housing+"', '"+data.status+"', '"+data.employment+"', '"+data.education+"', '"+data.biography+"', '"+data.height.replace("'", "_")+"', '"+data.btype+"', '"+data.hair+"', '"+data.genderpref+"', '"+data.prefagestart+"', '"+data.prefageend+"', '"+data.radius+"');"
 			console.log(q)
 			connection.query(q, function(err, rows, fields) {
 		  		if (err) throw err;

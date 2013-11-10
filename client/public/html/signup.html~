@@ -88,7 +88,7 @@
     </div>
 
 <div class="container"  class="clearfix">
-<form class="form-horizontal" name = "signup" id = "signup">
+<form class="form-horizontal" name = "signup" id = "signup" enctype="multipart/form-data">
 <div class="row">
   <div class="col-md-2">
 <legend>Signup</legend>
@@ -478,7 +478,7 @@
   </div>
 </div>
 
-<!-- Multiple Checkboxes -->
+<!-- 
 <div class="control-group">
   <label class="control-label" for="children">Children</label>
   <div class="controls">
@@ -492,7 +492,7 @@
     </label>
   </div>
 </div>
-
+-->
 
 </div>
 <div class="col-md-2">
@@ -905,6 +905,14 @@
       <option>64km</option>
       <option>128km</option>
     </select>
+  </div>
+</div>
+<br />
+<legend>Profile Picture</legend>
+<!-- Text input-->
+<div class="control-group">
+  <div class="controls">
+    <input id="textinput" name="textinput" type="file" placeholder="placeholder" class="input-xlarge">
   </div>
 </div>
 

@@ -82,6 +82,8 @@ exports.login = function(req, res){
 }
 
 exports.create = function(req, res){
+
+	console.log(req.files)
 	var data = req.body
 	console.log(data)
 	var connection = mysql.createConnection({

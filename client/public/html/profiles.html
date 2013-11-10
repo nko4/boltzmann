@@ -81,30 +81,50 @@
       </div>
     </div>
 
+<br />
 <div class="container">
-Name: <span id = "username"></span><br />  
-Age: <span id = "age"></span><br />
-Status: <span id = "status"></span><br />
-Smokes? <span id = "smoker"></span> <br />   
-Employment: <span id = "employment"></span> <br />  
-Living Situation: <span id = "housing"></span> <br />  
-
-
-          <form id = "meetorpass" name = "meetorpass">
-            <button type="submit" id ="meet" class="btn btn-success">Meet</button>
-			<button type="submit" id ="pass" class="btn btn-warning">Pass</button>
-          </form>
+	<div class="row">
+		<div class="col-md-4">
+			Name: <span id = "username"></span><br />
+			Gender: <span id = "gender"></span><br />  
+			Age: <span id = "age"></span><br />
+			Status: <span id = "status"></span><br />
+			Smoker? <span id = "smoker"></span> <br />   
+			Employment: <span id = "employment"></span> <br />  
+			Living Situation: <span id = "housing"></span> <br />
+			Education: <span id = "education"></span> <br /> 
+			Height: <span id = "height"></span> <br /> 
+			Body Type: <span id = "bodytype"></span> <br /> 
+			Hair Color: <span id = "haircolor"></span> <br /> 
+		</div>
+		<div class="col-md-4">
+	   <img src="/images/avatar.png" width = '70%' />
+		</div>
+		<div class="col-md-4">
+			<br />
+			<form id = "meetorpass" name = "meetorpass">
+				<button type="submit" id ="meet" class="btn btn-success">Meet</button>
+				<br /><br />
+				<button type="submit" id ="pass" class="btn btn-warning">Pass</button>
+			</form>
+		</div>
+	</div>
 </div>
 
 <script>
 $.getJSON( "/users", function( data ) {
  window.data = data
  $("#username").html(data[0].username)
+$("#gender").html(data[0].gender)
  $("#age").html(data[0].age)
  $("#status").html(data[0].status)
  $("#smoker").html(["No", "Yes"][data[0].smoker])
  $("#employment").html(data[0].employment)
  $("#housing").html(data[0].housing)
+ $("#education").html(data[0].education)
+ $("#height").html(data[0].height.replace("_", '"'))
+ $("#bodytype").html(data[0].bodytype)
+ $("#haircolor").html(data[0].haircolor)
 });
 
 $( "#pass" ).click(function( event ) {

@@ -3,6 +3,10 @@
  **/
 
 var mysql = require('mysql');
+var util = require('util');
+
+var foursquare = (require('foursquarevenues'))('2QIWADP4J2Y3FPA0A4ZLD3CWBSEQS5C053TY15OR2PAYBLUC', 'NQRO4YW4PGCGHQE110YYWPYBMPJSG22YCAZQ4PCA4RAS5ONW');
+
 
 var Meeting = {};
 
@@ -23,7 +27,8 @@ var connection = mysql.createConnection({
                                         password : 'nicholas',
                                         database : 'testdb'
                                         });
-
+//geocoder
+var geocoder = require('node-geocoder').getGeocoder("google", 'http');
 
 /**
  return all active meetings for the user
@@ -40,11 +45,12 @@ Meeting.meetings = function(req, res){
                      res.send(rows, 200);
                      });
     
-    /*
-     Meeting.create(1234, 3461, function(userid){
+    
+     Meeting.create(1234, 1234, function(userid){
      console.log("new record " + userid);
      });
-     
+    
+     /*
      Meeting.create(2311, 2345, function(userid){
      console.log("new record " + userid);
      });
@@ -116,6 +122,77 @@ Meeting.create = function(user1_id, user2_id, callback){
                                       callback(userID);
                                       });
                      });
+    
+    
+    //check two user's address, and pick a meet place
+    
+    //obtain both user's address
+    var q1 = "SELECT street, city, state, country, postal FROM user WHERE user_id = '" + user1_id + "';";
+    console.log(q1);
+    connection.query(q1, function(err,rows,fields){
+        if(err) console.log(err);
+        var address1 = rows[0].street + " " + rows[0].city + " " + rows[0].state + " " + rows[0].country;
+        console.log("address1="+address1);
+        var q2 = "SELECT street, city, state, country, postal FROM user WHERE user_id = '" + user2_id + "';";
+        console.log(q2);
+        connection.query(q2, function(err,rows,fields){
+            if(err) console.log(err);
+            var address2 = rows[0].street + " " + rows[0].city + " " + rows[0].state + " " + rows[0].country;
+            console.log("address2="+address2);
+            
+            //find out their geo location from address
+            geocoder.geocode(address1, function(err, res) {
+                console.log(res);
+                if(err) console.log(err)
+                if(res.count==0) return;
+                
+                var lat1 = res[0].latitude;
+                var lng1 = res[0].longitude;
+                
+                geocoder.geocode(address2, function(err, res){
+                    console.log(res);
+                    if(err) console.log(err);
+                    if(res.count==0) return;
+                    
+                    var lat2 = res[0].latitude;
+                    var lng2 = res[0].longitude;
+                
+                            
+                    var centerLat = (lat1+lat2)/2.0;
+                    var centerLng = (lng1+lng2)/2.0;
+                    
+                    //search for coffee shop within 2km distance from center
+                    var params = {'ll' : String(centerLat + "," + centerLng), 'categoryId' : "4bf58dd8d48988d1e0931735"};
+                    foursquare.getVenues(params, function(err, data){
+                        console.log(venues);
+                        
+                        if(data && data.response && data.response.venues){
+                            var venues = data.response.venues;
+                            
+                            
+                            //sort by distance
+                            venues.sort(function(a,b){
+                                return (a.location.distance < b.location.distance);
+                            });
+                            
+                            for(var i=0;i<venues.count;i++)
+                                console.log(util.inspect(venues[i]));
+                                
+                                
+                            //pick the closest venue
+                            var meetPlace = venues[0];
+                            
+                        }
+                    });
+                    
+                });
+            });
+            
+            
+        });
+    });
+    
+
 };
 
 

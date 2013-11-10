@@ -22,9 +22,9 @@ var ScheduleError = {
 
 //db connection
 var connection = mysql.createConnection({
-                                        host     : '10.19.8.250',
-                                        user     : 'nicholas',
-                                        password : 'nicholas',
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
                                         database : 'testdb'
                                         });
 //geocoder

@@ -22,10 +22,10 @@ exports.meet = function(req, res){
 		var q = "INSERT INTO meet (user_id, likes, timestamp) VALUES ('"+req.session.userid +"', '"+data.who +"', NOW());"
 		console.log(q)
 		var connection = mysql.createConnection({
-			host     : '10.19.8.250',
-			user     : 'nicholas',
-			password : 'nicholas',
-			database : 'testdb'
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
 		})
 		connection.query(q, function(err, rows, fields) {
 			if (err) throw err;
@@ -45,10 +45,10 @@ exports.list = function(req, res){
 		var q = "SELECT * FROM user WHERE city = (SELECT city FROM user WHERE user_id = " + req.session.userid + ") ORDER BY RAND() LIMIT 1;"
 		console.log(q)
 		var connection = mysql.createConnection({
-			host     : '10.19.8.250',
-			user     : 'nicholas',
-			password : 'nicholas',
-			database : 'testdb'
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
 		}).query(q, function(err, rows, fields) {
 			if (err) throw err;
 			// We shouldn't send back all the data like the user password and email!
@@ -60,10 +60,10 @@ exports.list = function(req, res){
 exports.login = function(req, res){
 	var data = req.body
 	var connection = mysql.createConnection({
-		host     : '10.19.8.250',
-		user     : 'nicholas',
-		password : 'nicholas',
-		database : 'testdb'
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
 	});
 	console.log(req.body)
 	var q = "SELECT user_id AS id FROM user WHERE username = '"+ data.username +"' AND password = '"+ data.password +"';"
@@ -87,10 +87,10 @@ exports.create = function(req, res){
 	var data = req.body
 	console.log(data)
 	var connection = mysql.createConnection({
-		host     : '10.19.8.250',
-		user     : 'nicholas',
-		password : 'nicholas',
-		database : 'testdb'
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
 	});
 
 	connection.query("SELECT COUNT(1) AS count FROM user WHERE username = '"+ data.username +"';", function(err, rows, fields) {

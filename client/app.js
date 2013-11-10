@@ -6,6 +6,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var match = require('./routes/match');
 var http = require('http');
 var path = require('path');
 
@@ -35,6 +36,7 @@ app.get('/users', user.list);
 app.post('/signup', user.create);
 app.post('/login', user.login);
 app.post('/meet', user.meet);
+app.get('/match', match.notify);
 
 
 http.createServer(app).listen(app.get('port'), function(){

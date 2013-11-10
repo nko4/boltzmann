@@ -12,7 +12,6 @@ var mysql      = require('mysql');
 
 exports.meet = function(req, res){
 	data = req.body
-	console.log(data)
 	if (typeof req.session.userid === 'undefined'){
 		res.send("Not logged in.", 400);
 	}
@@ -20,16 +19,18 @@ exports.meet = function(req, res){
 		res.send("Not valid match.", 400);
 	}
 	else{
-		var q = "INSERT INTO meet (user_id, likes) VALUES ('"+req.session.userid +"', '"+data.who +"');"
+		var q = "INSERT INTO meet (user_id, likes, timestamp) VALUES ('"+req.session.userid +"', '"+data.who +"', NOW());"
 		console.log(q)
 		var connection = mysql.createConnection({
 			host     : '10.19.8.250',
 			user     : 'nicholas',
 			password : 'nicholas',
 			database : 'testdb'
-		}).query(q, function(err, rows, fields) {
+		})
+		connection.query(q, function(err, rows, fields) {
 			if (err) throw err;
 			// Should check to see if a meeting is mutual and alert the user.
+			
 		})
 		res.send("success", 200);
 	}
@@ -140,9 +141,11 @@ exports.create = function(req, res){
 		else if (typeof data.postal === "undefined"){
 			res.send({feild: "employment", error: "Value required."}, 400);
 		}
+// education, description, height, bodytype, haircolor, prefgender, prefagestart, prefageend, radius
 		else{
-			var q = "INSERT INTO user (username, password, email, street, city, state, country, postal, age, gender, smoker, housing, status, employment) VALUES ('"+data.username+"', '"+data.password+"', '"+data.email+"', '"+data.street+"', '"+data.city+"', '"+data.state+"', '"+data.country+"', '"+data.postal+
-			"', '"+data.age+"', '"+data.gender+"', '"+(0 + (data.smoker === "Yes"))+"', '"+data.housing+"', '"+data.status+"', '"+data.employment+"');"
+			var q = "INSERT INTO user (username, password, email, street, city, state, country, postal, age, gender, smoker, housing, status, employment, education, description, height, bodytype, haircolor, prefgender, prefagestart, prefageend, radius) VALUES ('"
+			+data.username+"', '"+data.password+"', '"+data.email+"', '"+data.street+"', '"+data.city+"', '"+data.state+"', '"+data.country+"', '"+data.postal+
+			"', '"+data.age+"', '"+data.gender+"', '"+(0 + (data.smoker === "Yes"))+"', '"+data.housing+"', '"+data.status+"', '"+data.employment+"', '"+data.education+"', '"+data.biography+"', '"+data.height.replace('"', "_")+"', '"+data.btype+"', '"+data.hair+"', '"+data.genderpref+"', '"+data.prefagestart+"', '"+data.prefageend+"', '"+data.radius+"');"
 			console.log(q)
 			connection.query(q, function(err, rows, fields) {
 		  		if (err) throw err;

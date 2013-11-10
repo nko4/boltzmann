@@ -116,8 +116,8 @@ $( "#pass" ).click(function( event ) {
 $( "#meet" ).click(function( event ) {
 	event.preventDefault();
 
-	console.log(window.data[0])
- 	$.post('/meet',  {who : window.data[0].id}, function(){ window.location = "/html/profiles.html";}).fail(function(res){
+	console.log(window.data[0].user_id)
+ 	$.post('/meet',  {who : window.data[0].user_id}, function(){ window.location = "/html/profiles.html";}).fail(function(res){
 		alert(window.data[0].id);
     });;
 

@@ -37,7 +37,8 @@ Meeting.meetings = function(req, res){
     var userid = req.session.userid;
     console.log("meetings");
     
-    var q = "SELECT meeting_id, user1_id, user2_id, status, error, new FROM meeting WHERE user1_id = '" + userid + "' OR user2_id = '" + userid +"';";
+    //var q = "SELECT meeting_id, user1_id, user2_id, status, error, new FROM meeting WHERE user1_id = '" + userid + "' OR user2_id = '" + userid +"';";
+	var q = "SELECT DISTINCT meeting_id, a.username AS user1, b.username AS user2, m.status, error, new FROM meeting m JOIN user a ON m.user1_id = a.user_id JOIN user b ON m.user2_id = b.user_id WHERE m.user1_id = '" + userid +"' OR m.user2_id = '" + userid +"';";
     console.log(q);
     
     connection.query(q, function(err, rows, fields){

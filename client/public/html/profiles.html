@@ -82,40 +82,25 @@
     </div>
 
 <div class="container">
-
-
+Name: <span id = "username"></span><br />  
+Age: <span id = "age"></span><br />
+Status: <span id = "status"></span><br />
+Smokes? <span id = "smoker"></span> <br />   
+Employment: <span id = "employment"></span> <br />  
+Living Situation: <span id = "housing"></span> <br />  
 </div>
 
 <script>
-$( "#signup" ).submit(function( event ) {
-	event.preventDefault();
-	$('.errorclass').hide()
-	$('input').css({'background-color' : '#FFFFFF'});
- 	$.post('/signup',  $('#signup').serializeArray(), function(){ window.location = "/";}).fail(function(res){
-		var res = res.responseJSON
-		if (typeof res.feild !== 'undefined'){
-			var feild = $("input[name="+res.feild+"]", "#signup")
-			console.log(res)
-			console.log(feild)
-			feild.focus();
-			feild.css({'background-color' : '#FFAAAA'});
-			feild.after("<p class = 'errorclass'>"+res.error+"</p>")
-		}
-		console.log(res)
-    });;
-
+$.getJSON( "/users", function( data ) {
+ $("#username").html(data[0].username)
+ $("#age").html(data[0].age)
+ $("#status").html(data[0].status)
+ $("#smoker").html(["No", "Yes"][data[0].smoker])
+ $("#employment").html(data[0].employment)
+ $("#housing").html(data[0].housing)
+ console.log(data)
 });
 
-
-$( "#login" ).submit(function( event ) {
-	event.preventDefault();
- 	$.post('/login',  $('#login').serializeArray(), function(){ window.location = "/";}).fail(function(res){
-		$('#loginfail').css("visibility","visible");
-		var res = res.responseJSON
-		console.log(res)
-    });;
-
-});
 </script>
 
 

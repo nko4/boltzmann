@@ -12,7 +12,23 @@ var mysql      = require('mysql');
 
 
 exports.list = function(req, res){
-	res.send("respond with a resource");
+	// This query is crude and not really what we need, but okay for testing purposes.
+	if (typeof req.session.userid === 'undefined'){
+		res.send("Not logged in.", 400);
+	}
+	else{
+		var q = "SELECT * FROM user WHERE city = (SELECT city FROM user WHERE user_id = " + req.session.userid + ") ORDER BY RAND() LIMIT 1;"
+		console.log(q)
+		var connection = mysql.createConnection({
+			host     : '10.19.8.250',
+			user     : 'nicholas',
+			password : 'nicholas',
+			database : 'testdb'
+		}).query(q, function(err, rows, fields) {
+			if (err) throw err;
+			res.send(rows, 200);
+		})
+	}
 };
 
 exports.login = function(req, res){
@@ -41,7 +57,7 @@ exports.login = function(req, res){
 
 exports.create = function(req, res){
 	var data = req.body
-
+	console.log(data)
 	var connection = mysql.createConnection({
 		host     : '10.19.8.250',
 		user     : 'nicholas',
@@ -81,8 +97,27 @@ exports.create = function(req, res){
 		else if (typeof data.postal === "undefined"){
 			res.send({feild: "postal", error: "Value required."}, 400);
 		}
+		else if (typeof data.age === "undefined"){
+			res.send({feild: "postal", error: "Value required."}, 400);
+		}
+		else if (typeof data.gender === "undefined"){
+			res.send({feild: "gender", error: "Value required."}, 400);
+		}
+		else if (typeof data.smoker === "undefined"){
+			res.send({feild: "smoker", error: "Value required."}, 400);
+		}
+		else if (typeof data.postal === "undefined"){
+			res.send({feild: "housing", error: "Value required."}, 400);
+		}
+		else if (typeof data.postal === "undefined"){
+			res.send({feild: "status", error: "Value required."}, 400);
+		}
+		else if (typeof data.postal === "undefined"){
+			res.send({feild: "employment", error: "Value required."}, 400);
+		}
 		else{
-			var q = "INSERT INTO user (username, password, email, street, city, state, country, postal) VALUES ('"+data.username+"', '"+data.password+"', '"+data.email+"', '"+data.street+"', '"+data.city+"', '"+data.state+"', '"+data.country+"', '"+data.postal+"');"
+			var q = "INSERT INTO user (username, password, email, street, city, state, country, postal, age, gender, smoker, housing, status, employment) VALUES ('"+data.username+"', '"+data.password+"', '"+data.email+"', '"+data.street+"', '"+data.city+"', '"+data.state+"', '"+data.country+"', '"+data.postal+
+			"', '"+data.age+"', '"+data.gender+"', '"+(0 + (data.smoker === "Yes"))+"', '"+data.housing+"', '"+data.status+"', '"+data.employment+"');"
 			console.log(q)
 			connection.query(q, function(err, rows, fields) {
 		  		if (err) throw err;

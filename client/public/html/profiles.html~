@@ -87,17 +87,40 @@ Age: <span id = "age"></span><br />
 Status: <span id = "status"></span><br />
 Smokes? <span id = "smoker"></span> <br />   
 Employment: <span id = "employment"></span> <br />  
+Living Situation: <span id = "housing"></span> <br />  
 
+
+          <form id = "meetorpass" name = "meetorpass">
+            <button type="submit" id ="meet" class="btn btn-success">Meet</button>
+			<button type="submit" id ="pass" class="btn btn-warning">Pass</button>
+          </form>
 </div>
 
 <script>
 $.getJSON( "/users", function( data ) {
+ window.data = data
  $("#username").html(data[0].username)
  $("#age").html(data[0].age)
  $("#status").html(data[0].status)
  $("#smoker").html(["No", "Yes"][data[0].smoker])
  $("#employment").html(data[0].employment)
- console.log(data)
+ $("#housing").html(data[0].housing)
+});
+
+$( "#pass" ).click(function( event ) {
+	event.preventDefault();
+ 	window.location = "/html/profiles.html"
+});
+
+
+$( "#meet" ).click(function( event ) {
+	event.preventDefault();
+
+	console.log(window.data[0])
+ 	$.post('/meet',  {who : window.data[0].id}, function(){ window.location = "/html/profiles.html";}).fail(function(res){
+		alert(window.data[0].id);
+    });;
+
 });
 
 </script>

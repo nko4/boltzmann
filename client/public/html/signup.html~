@@ -626,11 +626,11 @@ $( "#signup" ).submit(function( event ) {
 
 $( "#login" ).submit(function( event ) {
 	event.preventDefault();
- 	$.post('/login',  $('#login').serializeArray(), function(){ window.location = "/profiles.html";}).fail(function(res){
+ /*	$.post('/login',  $('#login').serializeArray(), function(){ window.location = "/html/profiles.html";}).fail(function(res){
 		$('#loginfail').css("visibility","visible");
 		var res = res.responseJSON
 		console.log(res)
-    });;
+    });;*/
 
 });
 </script>

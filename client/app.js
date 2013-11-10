@@ -34,6 +34,7 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 app.post('/signup', user.create);
 app.post('/login', user.login);
+app.post('/meet', user.meet);
 
 
 http.createServer(app).listen(app.get('port'), function(){

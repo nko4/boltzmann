@@ -10,13 +10,36 @@ function validEmail(e) {
 
 var mysql      = require('mysql');
 
+exports.meet = function(req, res){
+	data = req.body
+	if (typeof req.session.userid === 'undefined'){
+		res.send("Not logged in.", 400);
+	}
+	else if (typeof data.who === "undefined"){
+		res.send("Not valid match.", 400);
+	}
+	else{
+		var q = "INSERT INTO meet (user_id, likes) VALUES ('"+req.session.userid +"', '"+data.who +"');"
+		console.log(q)
+		var connection = mysql.createConnection({
+			host     : '10.19.8.250',
+			user     : 'nicholas',
+			password : 'nicholas',
+			database : 'testdb'
+		}).query(q, function(err, rows, fields) {
+			if (err) throw err;
+			// Should check to see if a meeting is mutual and alert the user.
+		})
+		res.send("success", 200);
+	}
+}
 
 exports.list = function(req, res){
-	// This query is crude and not really what we need, but okay for testing purposes.
 	if (typeof req.session.userid === 'undefined'){
 		res.send("Not logged in.", 400);
 	}
 	else{
+		// This query is crude and not really what we need, but okay for testing purposes.
 		var q = "SELECT * FROM user WHERE city = (SELECT city FROM user WHERE user_id = " + req.session.userid + ") ORDER BY RAND() LIMIT 1;"
 		console.log(q)
 		var connection = mysql.createConnection({
@@ -26,6 +49,7 @@ exports.list = function(req, res){
 			database : 'testdb'
 		}).query(q, function(err, rows, fields) {
 			if (err) throw err;
+			// We shouldn't send back all the data like the user password and email!
 			res.send(rows, 200);
 		})
 	}

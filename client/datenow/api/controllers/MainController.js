@@ -15,6 +15,7 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
+
 module.exports = {
     index: function (req, res) {
          res.view();
@@ -24,16 +25,27 @@ module.exports = {
     var username = req.param('username');
     var password = req.param('password');
 	var email = req.param('email');
-	var radius = req.param('radius');
 	var street = req.param('street');
 	var city = req.param('city');
 	var state = req.param('state');
 	var country = req.param('country');
-	console.log(radius)
-	console.log(street)
-	console.log(city)
-console.log(state)
-	console.log(country)
+	var postal = req.param('postal');
+	var age = req.param('age');
+	var gender = req.param('gender');
+//	var smoker = req.param('smoker');
+	var housing = req.param('housing');
+	var relationshipstatus = req.param('relationshipstatus');
+	var employment = req.param('employment');
+	var height = req.param('height');
+	var bodytype = req.param('bodytype');
+	var haircolor = req.param('haircolor');
+	var education = req.param('education');
+	var haschildren = req.param('haschildren');
+	var wantschildren = req.param('wantschildren');
+	var prefgender = req.param('prefgender');
+	var prefagestart = req.param('prefagestart');
+	var prefageend = req.param('prefageend');
+	var radius = req.param('radius');
     // Users.findByUsername(username)...
     // In v0.9.0 the find method returns an empty array when no results are found
     // when only one result is needed use findOne.
@@ -53,9 +65,17 @@ console.log(state)
         var hasher = require("password-hash");
         password = hasher.generate(password);
 
-        Users.create({ username: username, password: password, email: email, street: street, city : city, state: state, country : country, radius: radius})
+        Users.create({ 
+			username: username, password: password, email: email, 
+			street: street, city : city, state: state, country : country, postal : postal,
+			age : age, gender : gender, housing : housing, 
+			relationshipstatus : relationshipstatus, employment : employment, height : height,
+			bodytype : bodytype, haircolor : haircolor, education : education, haschildren : haschildren,
+			prefgender : prefgender, prefagestart : prefagestart, prefageend : prefageend, radius: radius
+		})
         .done(function signupCreatUser(error, user) {
           if (error) {
+			console.log(JSON.stringify(error))
             // Set the error header
             res.set('error', 'DB Error');
             res.send(500, { error: "DB Error" });

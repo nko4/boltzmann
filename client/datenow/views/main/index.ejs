@@ -4,7 +4,6 @@
   text-align: center;
 }
 </style>    
-
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -32,7 +31,7 @@
 
 <div class="container">
 <div class="clearfix">
-<form class="form-horizontal">
+<form class="form-horizontal" name = "signup" id = "signup">
 <fieldset>
 
 <!-- Form Name -->
@@ -417,6 +416,7 @@
       <option>61</option>
       <option>62</option>
       <option>63</option>
+
       <option>64</option>
       <option>65</option>
       <option>66</option>
@@ -671,33 +671,6 @@
 
 <!-- Multiple Checkboxes -->
 <div class="control-group">
-  <label class="control-label" for="own">Possess </label>
-  <div class="controls">
-    <label class="checkbox" for="own-0">
-      <input type="checkbox" name="own" id="own-0" value="Car">
-      Car
-    </label>
-    <label class="checkbox" for="own-1">
-      <input type="checkbox" name="own" id="own-1" value="Apartment">
-      Apartment
-    </label>
-    <label class="checkbox" for="own-2">
-      <input type="checkbox" name="own" id="own-2" value="House">
-      House
-    </label>
-    <label class="checkbox" for="own-3">
-      <input type="checkbox" name="own" id="own-3" value="Boat">
-      Boat
-    </label>
-    <label class="checkbox" for="own-4">
-      <input type="checkbox" name="own" id="own-4" value="Yacht">
-      Yacht
-    </label>
-  </div>
-</div>
-
-<!-- Multiple Checkboxes -->
-<div class="control-group">
   <label class="control-label" for="children">Children</label>
   <div class="controls">
     <label class="checkbox" for="children-0">
@@ -883,9 +856,9 @@
 
 <!-- Button -->
 <div class="control-group">
-  <label class="control-label" for="signup"></label>
+  <label class="control-label" for="signupButton"></label>
   <div class="controls">
-    <button id="signupButton" name="signup" class="btn btn-primary">Signup</button>
+    <button type = "submit" id="signupButton" name="signupButton" class="btn btn-primary">Signup</button>
   </div>
 </div>
 
@@ -893,10 +866,13 @@
 </form>
 </div>
 
-
 </div>
 
+
+
 <script>
+
+
     $("#loginButton").click(function(){
         var username = $("#loginName").val();
         var password = $("#loginPassword").val();
@@ -916,8 +892,10 @@
     });
 
 $("#signupButton").click(function(){
+
     var username = $("#username").val();
     var password = $("#password").val();
+	var email = $("#email").val();
     var confirmPassword = $("#confirmpassword").val();
 	var street = $("#street").val();
 	var city = $("#city").val();
@@ -925,56 +903,60 @@ $("#signupButton").click(function(){
 	var country = $("#country").val();
 	var postal = $("#postal").val();
 	var age = $("#age").val();
-	var gender = $("#gender").val();
-	var smoker = $("#smoke").val();
-	var housing = $("#housing").val();
-	var status = $("#status").val();
-	var emplyment = $("#employment").val();
+	var gender = $('input[name=gender]:checked', '#signup').val()
+	var smoker = $('input[name=smoke]:checked', '#signup').val()
+	var housing = $('input[name=housing]:checked', '#signup').val()
+	var status = $('input[name=status]:checked', '#signup').val()
+	var employment = $('input[name=employment]:checked', '#signup').val()
 	var height = $("#height").val();
-	var bodytype = $("#btype").val();
-	var hair = $("#hair").val();
-	var education = $("#education").val();
-	var own = $("#own").val();
-	var children = $("#children").val();
-	var description = $("#description").val();
-	var prefgender = $("#prefgender").val();
+	var bodytype = $('input[name=btype]:checked', '#signup').val()
+	var hair = $('input[name=hair]:checked', '#signup').val()
+	var education =  $('input[name=education]:checked', '#signup').val()
+	var haschildren = $('input[id=children-0]', '#signup').prop('checked');
+	var wantschildren = $('input[id=children-1]', '#signup').prop('checked');
+	var description = $("#biography").val();
+
+	if($('input[name=genderpref]:checked', '#signup').val() == "Guy"){ a = "Male"} else {a = "Female"};
+
+	var prefgender = a
 	var prefagestart = $("#prefagestart").val();
 	var prefageend = $("#prefageend").val();
 	var radius = $("#radius").val();
-
+    var data = {
+		username: username, 
+		password: password,
+		email: email,
+		street: street,
+		city: city,
+		state: state,
+		country: country,
+		postal: postal,
+		age: age,
+		gender: gender,
+		smoker: smoker,
+		housing: housing,
+		relationshipstatus: status,
+		employment: employment,
+		height: height,
+		bodytype: bodytype,
+		haircolor: hair,
+		education : education,
+		haschildren: haschildren,
+		wantschildren : wantschildren,
+		description: description,
+		prefgender: prefgender,
+		prefagestart : prefagestart,
+		prefageend : prefageend,
+		radius : radius
+	};
     if (username && password) {
         if (password === confirmPassword) {
+			alert(JSON.stringify(data));
             $.post(
                 '/signup',
-                {
-					username: username, 
-					password: password,
-					email: email,
-					street: street,
-					city: city,
-					state: state,
-					country: country,
-					postal: postal,
-					age: age,
-					gender: gender,
-					smoker: smoker,
-					housing: housing, 
-					relationshipstatus: status,
-					employment: employment,
-					height: height,
-					bodytype: bodytype,
-					haircolor: hair,
-					education : education,
-					owns: owns,
-					children: children,
-					description: description,
-					prefgender: prefgender,
-					prefagestart : prefagestart,
-					prefageend : prefageend,
-					radius : radius
-				},
+                data,
                 function () {
-                    window.location = '/chat'
+                    window.location = '/users'
                 }
             ).fail(function(res){
                 alert("Error: " + res.getResponseHeader("error"));
@@ -986,5 +968,11 @@ $("#signupButton").click(function(){
         alert("A username and password is required");
     }
 }); 
+
+// {"username":"aaaaaaa","password":"aaaaaaa","email":"aaaaaaa@aaaaaaaaa","street":"aaaaaaa","city":"aaaaaaa","state":"aaaaaaa","countr
+//y":"Afghanistan","postal":"aaaaaa","age":"15","gender":"Male","smoker":"No","housing":"Owner","relationshipstatus":"Never Married","employment":"Happily Employeed","height":"4'0\"","bodytype":"Muscular","haircolor":"Blonde","education":"Elementary School
+//","haschildren":false,"wantschildren":false,"description":"aaa","prefgender":"Male","prefagestart":"15","prefageend":"15","radius":"
+//1km"}
+
 
 </script>

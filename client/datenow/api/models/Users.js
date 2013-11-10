@@ -42,7 +42,7 @@ module.exports = {
 	  type: 'string',
       required: true
 	},	
-/*
+
 	country:{
 	  type: 'string',
       required: true
@@ -65,12 +65,12 @@ module.exports = {
 		type: 'string',
 		required: true
 	},
-
+/*
 	smoker:{
 		type: 'boolean',
 		required: true
 	},
-
+*/
 	housing:{
 		type: 'string',
 		required: true
@@ -106,21 +106,22 @@ module.exports = {
 		required: true
 	},
 
-	owns:{
-		type: 'string',
+
+	haschildren:{
+		type: 'boolean',
 		required: true
 	},
 
-	children:{
-		type: 'string',
+	wantschildren:{
+		type: 'boolean',
 		required: true
 	},
-
+/*
 	description:{
 		type: 'string',
 		required: true
 	},
-
+*/
 	prefgender: {
 		type: 'string',
 		required: true
@@ -135,7 +136,7 @@ module.exports = {
 		type: 'integer',
 		required: true
 	},
-*/
+
 	radius: {
 		type: 'integer',
 		required: true

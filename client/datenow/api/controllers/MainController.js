@@ -23,6 +23,17 @@ module.exports = {
   signup: function (req, res) {
     var username = req.param('username');
     var password = req.param('password');
+	var email = req.param('email');
+	var radius = req.param('radius');
+	var street = req.param('street');
+	var city = req.param('city');
+	var state = req.param('state');
+	var country = req.param('country');
+	console.log(radius)
+	console.log(street)
+	console.log(city)
+console.log(state)
+	console.log(country)
     // Users.findByUsername(username)...
     // In v0.9.0 the find method returns an empty array when no results are found
     // when only one result is needed use findOne.
@@ -42,7 +53,7 @@ module.exports = {
         var hasher = require("password-hash");
         password = hasher.generate(password);
 
-        Users.create({ username: username, password: password })
+        Users.create({ username: username, password: password, email: email, street: street, city : city, state: state, country : country, radius: radius})
         .done(function signupCreatUser(error, user) {
           if (error) {
             // Set the error header

@@ -30,27 +30,27 @@ module.exports = {
 
 	street:{
 	  type: 'string',
-      require: true
+      required: true
 	},
 
 	city:{
 	  type: 'string',
-      require: true
+      required: true
 	},	
 
 	state:{
 	  type: 'string',
-      require: true
+      required: true
 	},	
-
+/*
 	country:{
 	  type: 'string',
-      require: true
+      required: true
 	},	
 
 	postal:{
 	  type: 'string',
-      require: true,
+      required: true,
 	  minLength: 6,
       maxLength: 6
 	},
@@ -88,7 +88,7 @@ module.exports = {
 
 	height: {
 		type: 'string', 
-		require: true
+		required: true
 	},
 
 	bodytype:{
@@ -98,7 +98,7 @@ module.exports = {
 	
 	haircolor: {
 		type: 'string',
-		require: true
+		required: true
 	},
 
 	education:{
@@ -123,22 +123,22 @@ module.exports = {
 
 	prefgender: {
 		type: 'string',
-		require: true
+		required: true
 	},
 
 	prefagestart: {
 		type: 'integer',
-		require: true
+		required: true
 	},
 
 	prefageend: {
 		type: 'integer',
-		require: true
+		required: true
 	},
-
+*/
 	radius: {
 		type: 'integer',
-		require: true
+		required: true
 	}	
 
   },

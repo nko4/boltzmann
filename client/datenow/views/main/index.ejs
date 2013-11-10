@@ -14,7 +14,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">DateNow</a>
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
@@ -94,9 +94,9 @@
 
 <!-- Text input-->
 <div class="control-group">
-  <label class="control-label" for="textinput">State / Province</label>
+  <label class="control-label" for="state">State / Province</label>
   <div class="controls">
-    <input id="textinput" name="textinput" type="text" placeholder="State / Province" class="input-xlarge" required="">
+    <input id="state" name="state" type="text" placeholder="State / Province" class="input-xlarge" required="">
     
   </div>
 </div>
@@ -902,7 +902,7 @@
         var password = $("#loginPassword").val();
         if (username && password) {
             $.post(
-                '/login',
+                '/signup',
                 {username: username, password:password},
                 function () {
                     window.location = "/chat";
@@ -918,14 +918,63 @@
 $("#signupButton").click(function(){
     var username = $("#username").val();
     var password = $("#password").val();
-    var confirmPassword = $("#confirmPassword").val();
+    var confirmPassword = $("#confirmpassword").val();
+	var street = $("#street").val();
+	var city = $("#city").val();
+	var state = $("#state").val();
+	var country = $("#country").val();
+	var postal = $("#postal").val();
+	var age = $("#age").val();
+	var gender = $("#gender").val();
+	var smoker = $("#smoke").val();
+	var housing = $("#housing").val();
+	var status = $("#status").val();
+	var emplyment = $("#employment").val();
+	var height = $("#height").val();
+	var bodytype = $("#btype").val();
+	var hair = $("#hair").val();
+	var education = $("#education").val();
+	var own = $("#own").val();
+	var children = $("#children").val();
+	var description = $("#description").val();
+	var prefgender = $("#prefgender").val();
+	var prefagestart = $("#prefagestart").val();
+	var prefageend = $("#prefageend").val();
+	var radius = $("#radius").val();
+
     if (username && password) {
         if (password === confirmPassword) {
             $.post(
                 '/signup',
-                {username: username, password:password},
+                {
+					username: username, 
+					password: password,
+					email: email,
+					street: street,
+					city: city,
+					state: state,
+					country: country,
+					postal: postal,
+					age: age,
+					gender: gender,
+					smoker: smoker,
+					housing: housing, 
+					relationshipstatus: status,
+					employment: employment,
+					height: height,
+					bodytype: bodytype,
+					haircolor: hair,
+					education : education,
+					owns: owns,
+					children: children,
+					description: description,
+					prefgender: prefgender,
+					prefagestart : prefagestart,
+					prefageend : prefageend,
+					radius : radius
+				},
                 function () {
-                    window.location = "/chat";
+                    window.location = '/chat'
                 }
             ).fail(function(res){
                 alert("Error: " + res.getResponseHeader("error"));

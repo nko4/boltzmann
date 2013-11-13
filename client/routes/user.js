@@ -8,7 +8,35 @@ function validEmail(e) {
     return String(e).search (filter) != -1;
 }
 
-var mysql      = require('mysql');
+var mysql = require('mysql');
+var util = require('util');
+
+
+//db connection
+var connection = mysql.createConnection({
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
+                                        });
+var handleErr = function(err){
+    console.log(util.inspect(err));
+    connection = mysql.createConnection({
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
+                                        });
+    connection.on('error', handleErr);
+    connection.on('end', handleErr);
+    connection.on('unhandledError', handleErr);
+};
+
+connection.on('error', handleErr);
+connection.on('end', handleErr);
+connection.on('unhandledError', handleErr);
+
+
 
 exports.meet = function(req, res){
 	data = req.body
@@ -21,12 +49,6 @@ exports.meet = function(req, res){
 	else{
 		var q = "INSERT INTO meet (user_id, likes, timestamp) VALUES ('"+req.session.userid +"', '"+data.who +"', NOW());"
 		console.log(q)
-		var connection = mysql.createConnection({
-                                        host     : '127.0.0.1',
-                                        user     : 'datenow',
-                                        password : 'datenow',
-                                        database : 'testdb'
-		})
 		connection.query(q, function(err, rows, fields) {
 			if (err) throw err;
 			// Should check to see if a meeting is mutual and alert the user.
@@ -44,12 +66,7 @@ exports.list = function(req, res){
 		// This query is crude and not really what we need, but okay for testing purposes.
 		var q = "SELECT * FROM user WHERE city = (SELECT city FROM user WHERE user_id = " + req.session.userid + ") ORDER BY RAND() LIMIT 1;"
 		console.log(q)
-		var connection = mysql.createConnection({
-                                        host     : '127.0.0.1',
-                                        user     : 'datenow',
-                                        password : 'datenow',
-                                        database : 'testdb'
-		}).query(q, function(err, rows, fields) {
+		connection.query(q, function(err, rows, fields) {
 			if (err) throw err;
 			// We shouldn't send back all the data like the user password and email!
 			res.send(rows, 200);
@@ -59,12 +76,6 @@ exports.list = function(req, res){
 
 exports.login = function(req, res){
 	var data = req.body
-	var connection = mysql.createConnection({
-                                        host     : '127.0.0.1',
-                                        user     : 'datenow',
-                                        password : 'datenow',
-                                        database : 'testdb'
-	});
 	console.log(req.body)
 	var q = "SELECT user_id AS id FROM user WHERE username = '"+ data.username +"' AND password = '"+ data.password +"';"
 	console.log(q)
@@ -86,13 +97,6 @@ exports.create = function(req, res){
 	console.log(req.files)
 	var data = req.body
 	console.log(data)
-	var connection = mysql.createConnection({
-                                        host     : '127.0.0.1',
-                                        user     : 'datenow',
-                                        password : 'datenow',
-                                        database : 'testdb'
-	});
-
 	connection.query("SELECT COUNT(1) AS count FROM user WHERE username = '"+ data.username +"';", function(err, rows, fields) {
 		if (err) throw err;
 		if(rows[0].count > 0){

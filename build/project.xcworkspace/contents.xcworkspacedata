@@ -4752,7 +4752,4 @@
    <FileRef
       location = "group:../README.md">
    </FileRef>
-   <FileRef
-      location = "group:../server.js">
-   </FileRef>
 </Workspace>

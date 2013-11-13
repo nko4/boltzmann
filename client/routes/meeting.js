@@ -27,6 +27,24 @@ var connection = mysql.createConnection({
                                         password : 'datenow',
                                         database : 'testdb'
                                         });
+var handleErr = function(err){
+    console.log(util.inspect(err));
+    connection = mysql.createConnection({
+                                        host     : '127.0.0.1',
+                                        user     : 'datenow',
+                                        password : 'datenow',
+                                        database : 'testdb'
+                                        });
+    connection.on('error', handleErr);
+    connection.on('end', handleErr);
+    connection.on('unhandledError', handleErr);
+};
+
+connection.on('error', handleErr);
+connection.on('end', handleErr);
+connection.on('unhandledError', handleErr);
+
+
 //geocoder
 var geocoder = require('node-geocoder').getGeocoder("google", 'http');
 

@@ -5,7 +5,7 @@
 var mysql = require('mysql');
 var util = require('util');
 
-var foursquare = (require('foursquarevenues'))('2QIWADP4J2Y3FPA0A4ZLD3CWBSEQS5C053TY15OR2PAYBLUC', 'NQRO4YW4PGCGHQE110YYWPYBMPJSG22YCAZQ4PCA4RAS5ONW');
+var foursquare = (require('foursquarevenues'))('', '');
 
 
 var Meeting = {};
